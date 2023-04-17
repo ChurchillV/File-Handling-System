@@ -14,7 +14,7 @@ void deleteFile();
 int main() {
     int looping = 0;
     do {//system("cls");
-    printf("\nFILE MANAGEMENT SYSTEM\n");
+    printf("\n\n\nFILE MANAGEMENT SYSTEM\n");
     printf("------------------------\n\n### OPTIONS ###\n\n");
     printf("1 - Create a File\n2 - Read a File's Content\n3 - Rename/Edit a File\n4 - Delete a File\n5 - Exit");
     printf("\nYour choice: ");
@@ -236,8 +236,69 @@ void renameFile() {
     switch (option)
     {
     case 1:
-        printf("This functionality isn't ready yet");
-        looping = 1;
+        do {printf("\nFILE EDITING (Exclusively append mode for now)\n-----------------------------------------\n\n");
+        printf("\nEnter the name of the File to be edited: ");
+        char filename[50];
+        fflush(stdin);
+        scanf(" %s", &filename);
+        sprintf(filename, "%s.txt", filename);
+        //Check if file exists
+        FILE *edit_file;
+        if (edit_file = fopen(filename, "r")) {
+            printf("\n\nEnter the text you'd like to add: ");
+            char txt[200];
+            fflush(stdin);
+            gets(txt);
+            edit_file = fopen(filename, "a");
+            printf("\n\nEditing your text file...");
+            int i = 0;
+            while (txt[i] != '\0')
+            {
+                fputc(txt[i], edit_file);
+                i++;
+            }
+            fclose(edit_file);
+            do {printf("\n\nSuccess! Would you like to go again?\n\n1 - YES\n2 - NO\n\nYour choice: ");
+            fflush(stdin);
+            scanf(" %d", &option);
+            switch (option)
+            {
+            case 1:
+                printf("Alright! Here we go again...");
+                looping = 1;
+                break;
+            case 2: 
+                printf("\nAlright! Exiting edit mode...");
+                looping = 0;
+                break;
+
+            default:
+                printf("\nInvalid option. Please try again");
+                looping = 2;
+                break;
+            }} while (looping == 2);
+        }
+        else {
+            do {printf("\n\nFile not found. Try again?\n\n1 - YES\n2 - NO\n\nYour choice: ");
+            fflush(stdin);
+            scanf(" %d", &option);
+            switch (option)
+            {
+            case 1:
+                printf("Alright! Here we go again...");
+                looping = 1;
+                break;
+            case 2: 
+                printf("\nAlright! Exiting edit mode...");
+                looping = 0;
+                break;
+            
+            default:
+                printf("\nInvalid option. Please try again");
+                looping = 2;
+                break;
+            }} while (looping == 2);
+        }} while (looping == 1);
         break;
     case 2:
         int inner_loop = 0;
